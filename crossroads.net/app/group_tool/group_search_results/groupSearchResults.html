@@ -1,18 +1,23 @@
 <div>
   <h1 class="page-header">Search Results</h1>
   <form role="form" name="groupSearchForm" ng-submit="groupSearch.submit()">
-    <div class="row push-bottom">
+    <div class="row">
       <div class="col-sm-5">
-        <div class="form-group">
+        <div class="input-group push-half-bottom">
           <input id="query" ng-model="search.query" type="text" class="form-control" placeholder="Ex: Boxing, Joe Smith, Crossroads Site">
+          <span class="group-search-icon input-group-addon">
+            <svg viewBox="0 0 32 32" class="icon search3">
+              <use xlink:href="#search3"></use>
+            </svg>
+          </span>
         </div>
       </div>
-      <div class="group-location-tool col-sm-5 col-sm-offset-2">
+      <div class="group-location-tool push-bottom col-sm-5 col-sm-offset-2">
         Find Groups Near You
       </div>
     </div>
 
-    <table class="group-result-desktop hidden-xs">
+    <table class="table group-result-desktop hidden-xs">
       <thead>
         <tr>
           <th class="group-name">Group Name</th>

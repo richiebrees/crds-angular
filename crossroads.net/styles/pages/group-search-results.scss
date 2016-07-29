@@ -6,8 +6,17 @@ group-search-results {
     }
   }
 
+  .group-search-icon {
+    background-color: $white;
+
+    svg {
+      width: 22px;
+      height: 22px;
+    }
+  }
+
   table {
-    th, tr {
+    tr {
       font-size: 95%;
     }
 

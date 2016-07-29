@@ -1,18 +1,18 @@
 <div>
   <h1 class="page-header">Search Results</h1>
   <form role="form" name="groupSearchForm" ng-submit="groupSearch.submit()">
-    <div class="row">
+    <div class="row push-bottom">
       <div class="col-sm-5">
         <div class="form-group">
           <input id="query" ng-model="search.query" type="text" class="form-control" placeholder="Ex: Boxing, Joe Smith, Crossroads Site">
         </div>
       </div>
-      <div class="col-sm-5 col-sm-offset-2 text-right">
+      <div class="group-location-tool col-sm-5 col-sm-offset-2">
         Find Groups Near You
       </div>
     </div>
 
-    <table class="table">
+    <table class="group-result-desktop hidden-xs">
       <thead>
         <tr>
           <th class="group-name">Group Name</th>
@@ -26,7 +26,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr ng-repeat="group in groupSearchResults.results">
+        <tr ng-repeat="group in groupSearchResults.results" class="group-result">
           <td>{{group.groupName}}</td>
           <td>{{group.category}}</td>
           <td>{{group.detail}}</td>
@@ -38,6 +38,17 @@
         </tr>
       </tbody>
     </table>
+
+    <div class="group-results-mobile hidden-sm hidden-md hidden-lg">
+      <div ng-repeat="group in groupSearchResults.results" class="group-result push-half-bottom soft-half-bottom">
+        <div class="row">
+          <strong class="col-xs-10">{{group.groupName}}</strong>
+          <div class="col-xs-2">Map</div>
+        </div>
+        <div>{{group.category}} / {{group.detail}}</div>
+        <div>{{group.day}} at {{group.time}}</div>
+      </div>
+    </div>
 
   </form>
 </div>

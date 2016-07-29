@@ -1,4 +1,11 @@
 group-search-results {
+
+  .group-location-tool {
+    @media (min-width: $screen-sm-min) {
+      text-align: right;
+    }
+  }
+
   table {
     th, tr {
       font-size: 95%;
@@ -14,6 +21,12 @@ group-search-results {
 
     th.group-day, th.group-time {
       width: 100px;
+    }
+  }
+
+  .group-results-mobile {
+    .group-result {
+      border-bottom: 1px solid $gray-light;
     }
   }
 }

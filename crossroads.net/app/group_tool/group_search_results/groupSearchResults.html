@@ -1,0 +1,43 @@
+<div>
+  <h1 class="page-header">Search Results</h1>
+  <form role="form" name="groupSearchForm" ng-submit="groupSearch.submit()">
+    <div class="row">
+      <div class="col-sm-5">
+        <div class="form-group">
+          <input id="query" ng-model="search.query" type="text" class="form-control" placeholder="Ex: Boxing, Joe Smith, Crossroads Site">
+        </div>
+      </div>
+      <div class="col-sm-5 col-sm-offset-2 text-right">
+        Find Groups Near You
+      </div>
+    </div>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th class="group-name">Group Name</th>
+          <th class="group-category">Category</th>
+          <th class="group-detail">Detail</th>
+          <th class="group-type">Group Type</th>
+          <th class="group-site">Leader Site</th>
+          <th class="group-day">Day</th>
+          <th class="group-time">Time</th>
+          <th class="group-location">Location</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="group in groupSearchResults.results">
+          <td>{{group.groupName}}</td>
+          <td>{{group.category}}</td>
+          <td>{{group.detail}}</td>
+          <td>{{group.groupType}}</td>
+          <td>{{group.congregationName}}</td>
+          <td>{{group.day}}</td>
+          <td>{{group.time}}</td>
+          <td>Map</td>
+        </tr>
+      </tbody>
+    </table>
+
+  </form>
+</div>

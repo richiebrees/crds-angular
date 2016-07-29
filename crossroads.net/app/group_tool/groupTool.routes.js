@@ -120,5 +120,17 @@ export default function GroupToolRouter($httpProvider, $stateProvider) {
         }
       }
     })
+    .state('grouptool.search-results', {
+      parent: 'noSideBar',
+      url: '/groups/search/results',
+      template: '<group-search-results></group-search-results>',
+      data: {
+        isProtected: true,
+        meta: {
+          title: 'Search Results',
+          description: ''
+        }
+      }
+    })
   ;
 }

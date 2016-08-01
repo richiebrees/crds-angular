@@ -36,16 +36,21 @@
       </div>
     </div>
 
-    <table ng-table="groupSearchResults.tableParams" class="table group-result-desktop hidden-xs push-half-top">
-      <tr ng-repeat="group in $data" class="group-result">
-        <td title="'Group Name'" sortable="'groupName'" class="group-name"><a ng-click="">{{group.groupName}}</a></td>
+    <table ng-table="groupSearchResults.tableParams" class="table table-hover group-result-desktop hidden-xs push-half-top">
+      <tr ng-repeat-start="group in $data" class="group-result pointer" ng-click="group.expanded = !group.expanded">
+        <td title="'Group Name'" sortable="'groupName'" class="group-name"><a>{{group.groupName}}</a></td>
         <td title="'Category'" sortable="'category'" class="group-category">{{group.category}}</td>
         <td title="'Detail'" sortable="'detail'" class="group-detail">{{group.detail}}</td>
         <td title="'Group Type'" sortable="'groupType'" class="group-type">{{group.groupType}}</td>
         <td title="'Leader Site'" sortable="'congregationName'" class="group-site">{{group.congregationName}}</td>
         <td title="'Day'" sortable="'day'" class="group-day">{{group.day}}</td>
         <td title="'Time'" sortable="'time'" class="group-time">{{group.time | time}}</td>
-        <td title="'Distance'" class="group-location"><a ng-click="">Map</a></td>
+        <td title="'Distance'" class="group-location text-center" ng-click="groupSearchResults.openMap(group); $event.stopPropagation()"><a>Map</a></td>
+      </tr>
+      <tr ng-if="group.expanded" ng-repeat-end class="gray-lighter">
+        <td colspan="8">
+          <group-detail-about data="group"></group-detail-about>
+        </td>
       </tr>
     </table>
 

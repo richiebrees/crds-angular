@@ -13,11 +13,16 @@ export default class GroupSearchResultsController {
   }
 
   submit() {
+    console.log('Search Submit');
   }
 
   searchWithLocation() {
     this.showLocationInput = false;
     this.searchedWithLocation = true;
+  }
+
+  openMap(group) {
+    console.log('Open Map');
   }
 }
 

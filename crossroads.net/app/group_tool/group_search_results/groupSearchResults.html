@@ -1,9 +1,9 @@
 <div>
   <h1 class="page-header">Search Results</h1>
   <form role="form" name="groupSearchForm" ng-submit="groupSearch.submit()">
-    <div class="row">
-      <div class="col-sm-5">
-        <div class="input-group push-half-bottom">
+    <div class="group-search-tools row">
+      <div class="col-sm-5 push-half-bottom">
+        <div class="input-group">
           <input id="query" ng-model="search.query" type="text" class="form-control" placeholder="Ex: Boxing, Joe Smith, Crossroads Site">
           <span class="group-search-icon input-group-addon">
             <svg viewBox="0 0 32 32" class="icon search3">
@@ -12,39 +12,35 @@
           </span>
         </div>
       </div>
-      <div class="group-location-tool push-bottom col-sm-5 col-sm-offset-2">
-        Find Groups Near You
+      <div class="group-location-tool col-sm-6 col-sm-offset-1 push-half-bottom">
+        <div ng-if="!groupSearchResults.showLocationInput" class="group-location-toggle">
+          <a ng-click="groupSearchResults.showLocationInput = true">Find Groups Near You</a>
+        </div>
+        <div ng-if="groupSearchResults.showLocationInput">
+          <label for="location">What part of town would you like to meet?</label>
+          <div class="group-location-input-wrapper">
+            <input id="location" ng-model="search.location" type="text" class="form-control" placeholder="Address, city or zip">
+            <button type="button" class="btn btn-primary">Save</button>
+            <button type="button" class="btn btn-standard" ng-click="groupSearchResults.showLocationInput = false">Cancel</button>
+          </div>
+        </div>
       </div>
     </div>
 
-    <table class="table group-result-desktop hidden-xs">
-      <thead>
-        <tr>
-          <th class="group-name">Group Name</th>
-          <th class="group-category">Category</th>
-          <th class="group-detail">Detail</th>
-          <th class="group-type">Group Type</th>
-          <th class="group-site">Leader Site</th>
-          <th class="group-day">Day</th>
-          <th class="group-time">Time</th>
-          <th class="group-location">Location</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr ng-repeat="group in groupSearchResults.results" class="group-result">
-          <td>{{group.groupName}}</td>
-          <td>{{group.category}}</td>
-          <td>{{group.detail}}</td>
-          <td>{{group.groupType}}</td>
-          <td>{{group.congregationName}}</td>
-          <td>{{group.day}}</td>
-          <td>{{group.time}}</td>
-          <td>Map</td>
-        </tr>
-      </tbody>
+    <table ng-table="groupSearchResults.tableParams" class="table group-result-desktop hidden-xs push-half-top">
+      <tr ng-repeat="group in $data" class="group-result">
+        <td title="'Group Name'" sortable="'groupName'" class="group-name">{{group.groupName}}</td>
+        <td title="'Category'" sortable="'category'" class="group-category">{{group.category}}</td>
+        <td title="'Detail'" sortable="'detail'" class="group-detail">{{group.detail}}</td>
+        <td title="'Group Type'" sortable="'groupType'" class="group-type">{{group.groupType}}</td>
+        <td title="'Leader Site'" sortable="'congregationName'" class="group-site">{{group.congregationName}}</td>
+        <td title="'Day'" sortable="'day'" class="group-day">{{group.day}}</td>
+        <td title="'Time'" sortable="'time'" class="group-time">{{group.time | time}}</td>
+        <td title="'Distance'" class="group-location">Map</td>
+      </tr>
     </table>
 
-    <div class="group-results-mobile hidden-sm hidden-md hidden-lg">
+    <div class="group-results-mobile hidden-sm hidden-md hidden-lg push-half-top">
       <div ng-repeat="group in groupSearchResults.results" class="group-result push-half-bottom soft-half-bottom">
         <div class="row">
           <strong class="col-xs-10">{{group.groupName}}</strong>

@@ -25,7 +25,8 @@
     'angular-stripe',
     'ngAnimate',
     'formly',
-    'formlyBootstrap'
+    'formlyBootstrap',
+    'ngTable'
     ])
     .constant('AUTH_EVENTS', {
       loginSuccess: 'auth-login-success',

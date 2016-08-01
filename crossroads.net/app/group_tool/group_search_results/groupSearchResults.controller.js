@@ -1,10 +1,12 @@
 export default class GroupSearchResultsController {
   /*@ngInject*/
-  constructor() {
+  constructor(NgTableParams) {
     this.search = null;
     this.processing = false;
 
     this.results = MOCK_DATA;
+
+    this.tableParams = new NgTableParams({}, { dataset: this.results });
   }
 
   submit() {

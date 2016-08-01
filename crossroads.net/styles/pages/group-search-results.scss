@@ -1,8 +1,26 @@
 group-search-results {
 
-  .group-location-tool {
+  .group-search-tools {
     @media (min-width: $screen-sm-min) {
-      text-align: right;
+      display: flex;
+      align-items: flex-end;
+    }
+  }
+
+  .group-location-tool {
+    .group-location-toggle {
+      @media (min-width: $screen-sm-min) {
+        text-align: right;
+      }
+    }
+
+    .group-location-input-wrapper {
+      display: flex;
+      margin: 0 -5px;
+
+      &> * {
+        margin: 0 5px;
+      }
     }
   }
 
@@ -20,17 +38,55 @@ group-search-results {
       font-size: 95%;
     }
 
-    th.group-name {
-      width: 30%;
+    .group-name {
+      width: auto;
     }
 
-    th.group-detail {
-
+    .group-category {
+      width: 12%;
     }
 
-    th.group-day, th.group-time {
-      width: 100px;
+    .group-detail {
+      width: 12%;
     }
+
+    .group-type {
+      width: 12%;
+    }
+
+    .group-site {
+      width: 11%;
+    }
+
+    .group-day {
+      width: 80px;
+    }
+
+    .group-time {
+      width: 80px;
+    }
+
+    .group-location {
+      width: 80px;
+    }
+  }
+
+  // Disable ng-table sort header background-color
+  .ng-table {
+    th {
+      text-align: left;
+    }
+
+    th.sortable.sort-desc, th.sortable.sort-asc {
+      background-color: transparent;
+    }
+  }
+
+  // Hide pagination on XS size
+  div[ng-table-pagination] {
+    //@media (max-width: $screen-sm-min) {
+      display: none!important;
+    //}
   }
 
   .group-results-mobile {

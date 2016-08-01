@@ -27,6 +27,7 @@
   require('angularjs-slider');
   require('angular-formly');
   require('angular-formly-templates-bootstrap');
+  require('ng-table');
 
   require('../node_modules/angularjs-slider/dist/rzslider.min.css');
   require('../node_modules/angular-toggle-switch/angular-toggle-switch-bootstrap.css');

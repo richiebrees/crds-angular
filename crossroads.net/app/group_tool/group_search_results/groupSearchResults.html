@@ -1,10 +1,11 @@
 <div>
   <h1 class="page-header">Search Results</h1>
-  <form role="form" name="groupSearchForm" ng-submit="groupSearch.submit()">
+  <form role="form" name="groupSearchForm" ng-submit="groupSearchResults.submit()">
     <div class="group-search-tools row">
       <div class="col-sm-5 push-half-bottom">
+        <label for="query">Search</label>
         <div class="input-group">
-          <input id="query" ng-model="search.query" type="text" class="form-control" placeholder="Ex: Boxing, Joe Smith, Crossroads Site">
+          <input id="query" ng-model="groupSearchResults.search.query" type="text" class="form-control" placeholder="Ex: Boxing, Joe Smith, Crossroads Site">
           <span class="group-search-icon input-group-addon">
             <svg viewBox="0 0 32 32" class="icon search3">
               <use xlink:href="#search3"></use>
@@ -13,30 +14,38 @@
         </div>
       </div>
       <div class="group-location-tool col-sm-6 col-sm-offset-1 push-half-bottom">
-        <div ng-if="!groupSearchResults.showLocationInput" class="group-location-toggle">
+        <div ng-show="!groupSearchResults.showLocationInput && !groupSearchResults.search.location.length" class="group-location-toggle">
           <a ng-click="groupSearchResults.showLocationInput = true">Find Groups Near You</a>
         </div>
-        <div ng-if="groupSearchResults.showLocationInput">
-          <label for="location">What part of town would you like to meet?</label>
-          <div class="group-location-input-wrapper">
-            <input id="location" ng-model="search.location" type="text" class="form-control" placeholder="Address, city or zip">
-            <button type="button" class="btn btn-primary">Save</button>
-            <button type="button" class="btn btn-standard" ng-click="groupSearchResults.showLocationInput = false">Cancel</button>
-          </div>
+        <div ng-show="groupSearchResults.showLocationInput">
+          <form role="form" name="groupLocationForm" ng-submit="groupSearchResults.searchWithLocation()">
+            <label for="location">What part of town would you like to meet?</label>
+            <div class="group-location-input-wrapper">
+              <input id="location" ng-model="groupSearchResults.search.location" type="text" class="form-control" placeholder="Address, city or zip">
+              <button type="submit" class="btn btn-primary" ng-click="groupSearchResults.searchWithLocation()">
+                <span ng-show="!groupSearchResults.searchedWithLocation">Save</span>
+                <span ng-show="groupSearchResults.searchedWithLocation">Update</span>
+              </button>
+              <button type="button" class="btn btn-standard" ng-click="groupSearchResults.showLocationInput = false">Cancel</button>
+            </div>
+          </form>
+        </div>
+        <div ng-show="!groupSearchResults.showLocationInput && groupSearchResults.search.location.length > 0" class="group-location-toggle">
+          <label>Groups Near:</label> <a ng-click="groupSearchResults.showLocationInput = true">{{groupSearchResults.search.location}}</a>
         </div>
       </div>
     </div>
 
     <table ng-table="groupSearchResults.tableParams" class="table group-result-desktop hidden-xs push-half-top">
       <tr ng-repeat="group in $data" class="group-result">
-        <td title="'Group Name'" sortable="'groupName'" class="group-name">{{group.groupName}}</td>
+        <td title="'Group Name'" sortable="'groupName'" class="group-name"><a ng-click="">{{group.groupName}}</a></td>
         <td title="'Category'" sortable="'category'" class="group-category">{{group.category}}</td>
         <td title="'Detail'" sortable="'detail'" class="group-detail">{{group.detail}}</td>
         <td title="'Group Type'" sortable="'groupType'" class="group-type">{{group.groupType}}</td>
         <td title="'Leader Site'" sortable="'congregationName'" class="group-site">{{group.congregationName}}</td>
         <td title="'Day'" sortable="'day'" class="group-day">{{group.day}}</td>
         <td title="'Time'" sortable="'time'" class="group-time">{{group.time | time}}</td>
-        <td title="'Distance'" class="group-location">Map</td>
+        <td title="'Distance'" class="group-location"><a ng-click="">Map</a></td>
       </tr>
     </table>
 

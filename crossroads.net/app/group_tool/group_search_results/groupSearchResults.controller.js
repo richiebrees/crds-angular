@@ -4,12 +4,20 @@ export default class GroupSearchResultsController {
     this.search = null;
     this.processing = false;
 
+    this.showLocationInput = false;
+    this.searchedWithLocation = false;
+
     this.results = MOCK_DATA;
 
     this.tableParams = new NgTableParams({}, { dataset: this.results });
   }
 
   submit() {
+  }
+
+  searchWithLocation() {
+    this.showLocationInput = false;
+    this.searchedWithLocation = true;
   }
 }
 

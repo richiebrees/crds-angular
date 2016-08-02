@@ -47,7 +47,7 @@
       <td title="'Group Type'" sortable="'groupType'" class="group-type">{{group.groupType}}</td>
       <td title="'Leader Site'" sortable="'congregationName'" class="group-site">{{group.congregationName}}</td>
       <td title="'Day'" sortable="'day'" class="group-day">{{group.day}}</td>
-      <td title="'Time'" sortable="'time'" class="group-time">{{group.time | time}}</td>
+      <td title="'Time'" sortable="'time'" class="group-time"><span ng-if="group.time">{{group.time | time}}</span></td>
       <td title="'Distance'" class="group-location text-center" ng-click="groupSearchResults.openMap(group); $event.stopPropagation()"><a>Map</a></td>
     </tr>
     <tr ng-if="group.expanded" ng-repeat-end class="gray-lighter">

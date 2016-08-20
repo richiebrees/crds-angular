@@ -474,6 +474,11 @@
           controller: 'StyleguideCtrl as styleguide',
           templateUrl: 'styleguide/styleguide.html'
         })
+        .state('groups-new', {
+          parent: 'screenWidth',
+          url: '/groups-new',
+          templateUrl: 'styleguide/groups-new.html'
+        })
         .state('go_trip_giving_results', {
           parent: 'noSideBar',
           url: '/go_trip_giving_results',

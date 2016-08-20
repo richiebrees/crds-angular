@@ -1,0 +1,53 @@
+#groups-landing {
+  margin: 0 -15px;
+
+  #groups-landing-get-in {
+    position: relative;
+    @include aspect-ratio(187, 100);
+    width: 100%;
+    background-color: blue;
+    background: url(//crds-cms-uploads.imgix.net/content/images/groups-landing/headerbg.jpg) top no-repeat;
+    background-size: cover;
+
+    img {
+      display: block;
+      width: 70%;
+      margin: 20% auto 0 auto;
+    }
+
+    button {
+      margin-top: 8%;
+      background-color: white;
+      text-transform: uppercase;
+    }
+
+  }
+
+  #groups-landing-releationships {
+    background-color: white;
+  }
+  
+  #groups-landing-video {
+    background-color: green;
+  }
+  
+  #groups-landing-leader {
+    background-color: lightblue;
+  }
+  
+  #groups-landing-onsite {
+    background-color: lightgray;
+  }
+
+  #groups-landing-resources {
+    background-color: white;
+  }
+
+  #groups-landing-faqs {
+    background-color: lightgray;
+  }
+
+  #groups-landing-help {
+    background-color: white;
+  }
+}

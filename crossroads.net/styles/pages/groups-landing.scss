@@ -1,16 +1,41 @@
 #groups-landing {
   margin: 0 -15px;
+  
+  $group-landing-dark-text: #231F20;
+  $group-landing-light-text: #939598;
+  $group-landing-border: $group-landing-light-text;
 
-  .group-landing-block {
-    > .aspect-content {
-      padding: 7% 7% 7% 7%;
-    }
+  $group-landing-margin: 8%;
+
+  .group-landing-push-bottom {
+    margin-bottom: $group-landing-margin;
+  }
+
+  .group-landing-center {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .group-landing-button {
+    //@extend .btn-sm;
+
+    background-color: transparent;
+    border-radius: 5px;
+    border-color: $group-landing-border;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1.1px;
+    text-transform: uppercase;
+  }
+
+  .group-landing-block, .group-landing-block > .aspect-content {
+    padding: $group-landing-margin $group-landing-margin $group-landing-margin $group-landing-margin;
   }
 
   .group-landing-header {
     display: inline-block;
     margin-bottom: 2%;
-    color: #231F20;
+    color: $group-landing-dark-text;
     font-size: 2.2vw;
     font-weight: 500;
     text-transform: uppercase;
@@ -20,7 +45,7 @@
       display: block;
       width: 100%;
       content: '';
-      background: #231F20;
+      background: $group-landing-dark-text;
       height: 2px;
     }
   }
@@ -29,49 +54,71 @@
     width: 93%;
     margin-left: auto;
     margin-right: auto;
+    margin-bottom: $group-landing-margin;
+    color: $group-landing-light-text;
     font-size: 2.9vw;
     line-height: 1.5;
+  }
+
+  .group-landing-subcontent {
+    width: 93%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: $group-landing-margin;
+    color: $group-landing-light-text;
+    font-size: 2vw;
+    line-height: 1.3;
+  }
+
+  .group-landing-faq-term {
+    color: $group-landing-light-text;
+    font-size: 2.9vw;
+    line-height: 1.5;
+  }
+
+  .group-landing-faq-definition {
+    color: $group-landing-light-text;
+    font-size: 2vw;
+    line-height: 1.3;
+    margin-bottom: $group-landing-margin;
   }
 
   #groups-landing-get-in {
     position: relative;
     @include aspect-ratio(187, 100);
     width: 100%;
-    background-color: blue;
     background: url(//crds-cms-uploads.imgix.net/content/images/groups-landing/headerbg.jpg) top no-repeat;
     background-size: cover;
+
+    .aspect-content {
+      padding-top: 20%;
+    }
 
     img {
       display: block;
       width: 70%;
-      margin: 20% auto 0 auto;
     }
 
     button {
-      margin-top: 8%;
       background-color: white;
-      text-transform: uppercase;
     }
 
   }
 
   #groups-landing-relationships {
-    @include aspect-ratio(443, 433);
     background-color: white;
-    color: #939598;
+  }
+  
+  #groups-landing-leader {
+    background-color: #DBE0E5;
 
-    .videoWrapper {
-      margin-top: 8%;
-      margin-bottom: 5%;
+    img {
+      width: 100%;
     }
   }
   
-g  #groups-landing-leader {
-    background-color: lightblue;
-  }
-  
   #groups-landing-onsite {
-    background-color: lightgray;
+    background-color: #F1F2F2;
   }
 
   #groups-landing-resources {
@@ -79,7 +126,7 @@ g  #groups-landing-leader {
   }
 
   #groups-landing-faqs {
-    background-color: lightgray;
+    background-color: #F1F2F2;
   }
 
   #groups-landing-help {

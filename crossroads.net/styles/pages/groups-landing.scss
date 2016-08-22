@@ -1,3 +1,20 @@
+//
+// Boostrap grid with no columns
+//
+.row.no-gutter {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.row.no-gutter [class*='col-']:not(:first-child),
+.row.no-gutter [class*='col-']:not(:last-child) {
+  padding-right: 0;
+  padding-left: 0;
+}
+
+//
+// Groups Landing page
+//
 #groups-landing {
   margin: 0 -15px;
   
@@ -122,7 +139,20 @@
   }
 
   #groups-landing-resources {
+    position: relative;
     background-color: white;
+
+    p {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 50%;
+      bottom: 50%;
+    }
+
+    img {
+      width: 100%;
+    }
   }
 
   #groups-landing-faqs {

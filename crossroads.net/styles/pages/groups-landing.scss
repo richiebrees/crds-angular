@@ -22,10 +22,32 @@
   $group-landing-light-text: #939598;
   $group-landing-border: $group-landing-light-text;
 
-  $group-landing-margin: 8%;
+  $group-landing-margin: 4%;
+  $group-landing-push: 6%;
+
+  $group-landing-margin-mobile: 6%;
+  $group-landing-push-mobile: 8%;
 
   .group-landing-push-bottom {
-    margin-bottom: $group-landing-margin;
+    margin-bottom: $group-landing-push;
+
+    @media (max-width: $screen-sm) {
+      margin-bottom: $group-landing-push-mobile;
+    }
+  }
+
+  .group-landing-push-half-bottom {
+    margin-bottom: $group-landing-push / 2;
+
+    @media (max-width: $screen-sm) {
+      margin-bottom: $group-landing-push-mobile / 2;
+    }
+  }
+
+  .group-landing-mobile-push-half-bottom {
+    @media (max-width: $screen-sm) {
+      margin-bottom: $group-landing-push-mobile / 2;
+    }
   }
 
   .group-landing-center {
@@ -45,8 +67,22 @@
     text-transform: uppercase;
   }
 
+  .group-landing-section {
+    padding: $group-landing-margin;
+  }
+
   .group-landing-block, .group-landing-block > .aspect-content {
-    padding: $group-landing-margin $group-landing-margin $group-landing-margin $group-landing-margin;
+    margin: $group-landing-margin auto;
+    //padding: $group-landing-margin;
+
+    @media (max-width: $screen-sm) {
+      margin: $group-landing-margin-mobile auto;
+    }
+    //
+    //&::after, &::before {
+    //  content: '';
+    //  clear: both;
+    //}
   }
 
   .group-landing-header {
@@ -59,6 +95,7 @@
     letter-spacing: 3px;
 
     @media (max-width: $screen-sm) {
+      margin-bottom: 4%;
       font-size: 4.2vw;
     }
 
@@ -75,7 +112,7 @@
     width: 93%;
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: $group-landing-margin;
+    //margin-bottom: $group-landing-margin;
     color: $group-landing-light-text;
     font-size: 2.9vw;
     line-height: 1.5;
@@ -89,7 +126,7 @@
     width: 93%;
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: $group-landing-margin;
+    //margin-bottom: $group-landing-margin;
     color: $group-landing-light-text;
     font-size: 2vw;
     text-align: left;
@@ -116,13 +153,16 @@
     color: $group-landing-light-text;
     font-size: 2vw;
     line-height: 1.3;
-    margin-bottom: $group-landing-margin;
     text-align: left;
 
     @media (max-width: $screen-sm) {
       font-size: 5vw;
     }
   }
+
+  //
+  // Section Specific Settings
+  //
 
   #groups-landing-get-in {
     position: relative;

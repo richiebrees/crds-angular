@@ -1,4 +1,8 @@
 //
+// GROUPS LANDING PAGE
+//
+
+//
 // Boostrap grid with no columns
 //
 .row.no-gutter {
@@ -17,7 +21,7 @@
 //
 #groups-landing {
   margin: 0 -15px;
-  
+
   $group-landing-dark-text: #231F20;
   $group-landing-light-text: #939598;
   $group-landing-border: $group-landing-light-text;
@@ -56,8 +60,6 @@
   }
 
   .group-landing-button {
-    //@extend .btn-sm;
-
     background-color: transparent;
     border-radius: 5px;
     border-color: $group-landing-border;
@@ -65,6 +67,7 @@
     font-weight: 600;
     letter-spacing: 1.1px;
     text-transform: uppercase;
+    padding: 10px 20px;
   }
 
   .group-landing-section {
@@ -73,16 +76,10 @@
 
   .group-landing-block, .group-landing-block > .aspect-content {
     margin: $group-landing-margin auto;
-    //padding: $group-landing-margin;
 
     @media (max-width: $screen-sm) {
       margin: $group-landing-margin-mobile auto;
     }
-    //
-    //&::after, &::before {
-    //  content: '';
-    //  clear: both;
-    //}
   }
 
   .group-landing-header {
@@ -189,7 +186,7 @@
   #groups-landing-relationships {
     background-color: white;
   }
-  
+
   #groups-landing-leader {
     background-color: #DBE0E5;
 
@@ -197,7 +194,7 @@
       width: 100%;
     }
   }
-  
+
   #groups-landing-onsite {
     background-color: #F1F2F2;
   }
@@ -206,11 +203,15 @@
     position: relative;
     background-color: white;
 
+    .group-landing-book {
+      position: relative;
+    }
+
     p {
       position: absolute;
-      top: 12%;
+      top: 20%;
       left: 0;
-      right: 52%;
+      right: 77%;
       bottom: 50%;
       font-size: 1.5vw;
       text-align: left;
@@ -218,6 +219,11 @@
 
       @media (max-width: $screen-sm) {
         font-size: 3vw;
+        right: 52%;
+      }
+
+      @media (min-width: $screen-lg) {
+        font-size: 0.9vw;
       }
     }
 

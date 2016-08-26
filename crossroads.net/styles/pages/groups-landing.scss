@@ -19,7 +19,7 @@
 //
 // Groups Landing page
 //
-#groups-landing {
+#xgroups-landing {
   margin: 0 -15px;
 
   $group-landing-dark-text: #231F20;
@@ -35,6 +35,10 @@
   .group-landing-push-bottom {
     margin-bottom: $group-landing-push;
 
+    @media (min-width: $screen-lg) {
+      margin-bottom: $group-landing-push * 0.8;
+    }
+
     @media (max-width: $screen-sm) {
       margin-bottom: $group-landing-push-mobile;
     }
@@ -42,6 +46,10 @@
 
   .group-landing-push-half-bottom {
     margin-bottom: $group-landing-push / 2;
+
+    @media (min-width: $screen-lg) {
+      margin-bottom: $group-landing-push / 2 * 0.8;
+    }
 
     @media (max-width: $screen-sm) {
       margin-bottom: $group-landing-push-mobile / 2;
@@ -72,10 +80,19 @@
 
   .group-landing-section {
     padding: $group-landing-margin;
+
+    @media (min-width: $screen-lg) {
+      padding: $group-landing-margin * 0.6;
+    }
+
   }
 
   .group-landing-block, .group-landing-block > .aspect-content {
     margin: $group-landing-margin auto;
+
+    @media (min-width: $screen-lg) {
+      margin: $group-landing-push * 0.6 auto;
+    }
 
     @media (max-width: $screen-sm) {
       margin: $group-landing-margin-mobile auto;
@@ -84,16 +101,17 @@
 
   .group-landing-header {
     display: inline-block;
+    margin-top: 0;
     margin-bottom: 2%;
     color: $group-landing-dark-text;
-    font-size: 2.2vw;
+    //font-size: 2.2vw;
     font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 3px;
 
     @media (max-width: $screen-sm) {
       margin-bottom: 4%;
-      font-size: 4.2vw;
+      //font-size: 4.2vw;
     }
 
     &::after {
@@ -107,15 +125,16 @@
 
   .group-landing-content {
     width: 93%;
+    margin-top: 0;
     margin-left: auto;
     margin-right: auto;
-    //margin-bottom: $group-landing-margin;
     color: $group-landing-light-text;
-    font-size: 2.9vw;
+    //font-size: 2.9vw;
     line-height: 1.5;
+    font-weight: 300;
 
     @media (max-width: $screen-sm) {
-      font-size: 6vw;
+      //font-size: 6vw;
     }
   }
 
@@ -123,37 +142,38 @@
     width: 93%;
     margin-left: auto;
     margin-right: auto;
-    //margin-bottom: $group-landing-margin;
     color: $group-landing-light-text;
-    font-size: 2vw;
+    //font-size: 2vw;
+    font-size: 140%;
     text-align: left;
     line-height: 1.3;
 
     @media (max-width: $screen-sm) {
-      font-size: 5vw;
+      font-size: 115%;
     }
   }
 
   .group-landing-faq-term {
     color: $group-landing-light-text;
-    font-size: 2.9vw;
+    //font-size: 2.9vw;
     line-height: 1.2;
     text-align: left;
     margin-bottom: 5px;
+    font-weight: 300;
 
     @media (max-width: $screen-sm) {
-      font-size: 6vw;
+      //font-size: 6vw;
     }
   }
 
   .group-landing-faq-definition {
     color: $group-landing-light-text;
-    font-size: 2vw;
+    font-size: 140%;
     line-height: 1.3;
     text-align: left;
 
     @media (max-width: $screen-sm) {
-      font-size: 5vw;
+      font-size: 115%;
     }
   }
 

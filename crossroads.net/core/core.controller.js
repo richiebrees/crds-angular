@@ -19,7 +19,8 @@
     '$window',
     '$location',
     'STATE_CHANGE_EVENTS',
-    'contentMessageService'
+    'contentMessageService',
+    'CMSService'
   ];
 
   function CoreController(

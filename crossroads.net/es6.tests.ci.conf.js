@@ -53,6 +53,7 @@ module.exports = function(config) {
             test: /\.js$/,
             include: [
               path.resolve(__dirname, 'app'),
+              path.resolve(__dirname, 'core'),
               path.resolve(__dirname, './node_modules/angular-stripe'),
               path.resolve(__dirname, 'spec')
             ],

@@ -11,7 +11,10 @@ function DynamicContentDirective($compile, $rootScope) {
       replace: true,
       link: function (scope, ele, attrs) {
         scope.$watch(attrs.dynamicContent, function(html) {
-            ele.html(html.$$unwrapTrustedValue());
+            if (html) {
+                ele.html(html.$$unwrapTrustedValue());
+            }
+            
             $compile(ele.contents())(scope);
 
             // notify core controller to reprocess dynamically loaded content, such as images

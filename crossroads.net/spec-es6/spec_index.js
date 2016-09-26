@@ -1,6 +1,6 @@
 import angular from 'angular';
 import mocks from 'angular-mocks';
-import moment from 'moment';
+import moment from 'moment-timezone';
 import ang from '../core/ang';
 import core from '../core/core';
 

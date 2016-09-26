@@ -1,0 +1,20 @@
+<div class="upcoming animated fadeIn">
+  <div ng-if="countdown.isCountdown" class="countdown">
+    <i>Join the live stream in...</i>
+    <ul class="list-inline">
+      <li><strong>{{ countdown.countdown.days }}</strong> <small>days</small></li>
+      <li class="vr"></li>
+      <li><strong>{{ countdown.countdown.hours }}</strong> <small>hours</small></li>
+      <li class="vr"></li>
+      <li><strong>{{ countdown.countdown.minutes }}</strong> <small>min</small></li>
+      <li class="vr"></li>
+      <li><strong>{{ countdown.countdown.seconds }}</strong> <small>sec</small></li>
+    </ul>
+    <a href="#" class="btn btn-sm btn-reminder" ng-click="countdown.openReminder()">Remind Me</a>
+  </div>
+  <div ng-if="countdown.isBroadcasting" class="in-progress">
+    <i>Live stream in progress...</i> <a class="btn btn-sm">Watch Now</a>
+  </div>
+</div>
+<streaming-reminder>
+</streaming-reminder>

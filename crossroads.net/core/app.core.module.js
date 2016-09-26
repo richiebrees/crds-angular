@@ -63,6 +63,7 @@
     .factory('AttributeTypeService', require('./services/attributeType.service'))
     .factory('ImageService', require('./services/image.service'))
     .factory('$exceptionHandler', require('./services/errorHandler.service'))
+    .factory('CMSService', require('./services/CMS.service'))
     .factory('PasswordService', require('./services/password_service'))
     ;
 

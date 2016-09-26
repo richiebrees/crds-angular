@@ -117,16 +117,16 @@ To run the project, run `gulp start` and point your browser to `http://localhost
 Follow these instructions in order to setup the application to call Gateway services that are hosted on IIS Express on a Windows VM running under VirtualBox on a Mac.
 
 ###Configuring the corkboard application
-Clone the crds-corkboard github repo to your local machine
+~~Clone the crds-corkboard github repo to your local machine~~
 
 ##Create the symbolic link (Windows)
-1. Open a command prompt with administrator access
-2. Change to the `PATH_TO_CRDS_ANGULAR_REPO/crossroads.net` folder
-3. Run the following command to create a symbolic link `mklink /D corkboard PATH_TO_CRDS_CORKBOARD_REPO/website`
+1. ~~Open a command prompt with administrator access~~
+2. ~~Change to the `PATH_TO_CRDS_ANGULAR_REPO/crossroads.net` folder~~
+3. ~~Run the following command to create a symbolic link `mklink /D corkboard PATH_TO_CRDS_CORKBOARD_REPO/website`~~
 
 ##Start the webpack processes
-1. Run gulp in the `PATH_TO_CRDS_CORKBOARD_REPO/website` folder
-2. Run gulp in the `PATH_TO_CRDS_ANGULAR_REPO/crossroads.net` folder
+1. Run gulp in the `PATH_TO_CRDS_ANGULAR_REPO/crossroads.net` folder
+2. ~~Run gulp in the `PATH_TO_CRDS_CORKBOARD_REPO/website` folder~~
 
 ###Create a VirtualBox Host-Only Network
 1. Open VirtualBox

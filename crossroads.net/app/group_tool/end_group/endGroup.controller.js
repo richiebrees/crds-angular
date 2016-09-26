@@ -71,7 +71,7 @@ export default class EndGroupController {
   getFields() {
     return [{
       key: 'reasonEndedId',
-      type: 'formlyBuilderRadioDesc',
+      type: 'crdsRadioDesc',
       templateOptions: {
         label: 'Why are you ending the group?',
         required: true,

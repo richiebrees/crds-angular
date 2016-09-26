@@ -2,7 +2,18 @@ describe('CoreController', function() {
 
   beforeEach(angular.mock.module('crossroads.core'));
 
-  var $controller, $rootScope, Message, MESSAGES, $aside, $scope, controller, growl, screenSize, $state;
+  let $controller,
+      $rootScope,
+      Message,
+      MESSAGES,
+      $aside,
+      $scope,
+      controller,
+      growl,
+      screenSize,
+      $state,
+      ContentBlock,
+      contentMessageService;
 
   beforeEach(angular.mock.module({
     ContentMessageService: {
@@ -12,11 +23,10 @@ describe('CoreController', function() {
     }
   }));
 
-  beforeEach(inject(function(_$controller_, _$rootScope_, _ContentBlock_, _SiteConfig_, _MESSAGES_, _$aside_, _growl_, _screenSize_, _$state_, _$log_, _ContentMessageService_){
+  beforeEach(inject(function(_$controller_, _$rootScope_, _ContentBlock_, _MESSAGES_, _$aside_, _growl_, _screenSize_, _$state_, _$log_, _ContentMessageService_){
     $controller = _$controller_;
     $rootScope = _$rootScope_;
     ContentBlock = _ContentBlock_;
-    SiteConfig = _SiteConfig_;
     MESSAGES = _MESSAGES_;
     $aside = _$aside_;
     growl = _growl_;
@@ -29,7 +39,6 @@ describe('CoreController', function() {
       '$rootScope': $rootScope,
       'MESSAGES': MESSAGES,
       'ContentBlock': ContentBlock,
-      'SiteConfig': SiteConfig,
       'growl': growl,
       '$aside': $aside,
       'screenSize': screenSize,
@@ -40,6 +49,7 @@ describe('CoreController', function() {
 
   describe('function mapContentBlocks', function() {
     it('should set MESSAGES with retrieved contentBlocks', function() {
+      MESSAGES = {};
       var firstMessage = {id: 1, title: 'firstMessage'};
       var secondMessage = {id: 2, title: 'secondMessage'};
       var thirdMessage = {id: 3, title: 'thirdMessage'};
@@ -52,6 +62,7 @@ describe('CoreController', function() {
       ];
 
       controller.mapContentBlocks(contentBlocks);
+      console.log(MESSAGES);
       expect(_.size(MESSAGES)).toBe(4);
       expect(MESSAGES.firstMessage).toBe(firstMessage);
       expect(MESSAGES.secondMessage).toBe(secondMessage);

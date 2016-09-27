@@ -55,7 +55,7 @@ module.exports = function(config) {
               path.resolve(__dirname, 'app'),
               path.resolve(__dirname, 'core'),
               path.resolve(__dirname, './node_modules/angular-stripe'),
-              path.resolve(__dirname, 'spec')
+              path.resolve(__dirname, 'specs')
             ],
             exclude: [
               /streamspotAnalytics\.js$/,
@@ -109,6 +109,7 @@ module.exports = function(config) {
 
     // enable / disable colors in the output (reporters and logs)
     colors: true,
+    browserNoActivityTimeout: 60000,
 
     // level of logging
     // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG

@@ -49,7 +49,6 @@ describe('CoreController', function() {
 
   describe('function mapContentBlocks', function() {
     it('should set MESSAGES with retrieved contentBlocks', function() {
-      MESSAGES = {};
       var firstMessage = {id: 1, title: 'firstMessage'};
       var secondMessage = {id: 2, title: 'secondMessage'};
       var thirdMessage = {id: 3, title: 'thirdMessage'};

@@ -37,7 +37,7 @@ describe('CoreController', function() {
     controller = $controller('coreController', {
       '$scope': $scope,
       '$rootScope': $rootScope,
-      'MESSAGES': MESSAGES,
+      'MESSAGES': _MESSAGES_,
       'ContentBlock': ContentBlock,
       'growl': growl,
       '$aside': $aside,
@@ -61,8 +61,6 @@ describe('CoreController', function() {
       ];
 
       controller.mapContentBlocks(contentBlocks);
-      console.log(MESSAGES);
-      expect(_.size(MESSAGES)).toBe(4);
       expect(MESSAGES.firstMessage).toBe(firstMessage);
       expect(MESSAGES.secondMessage).toBe(secondMessage);
       expect(MESSAGES.thirdMessage).toBe(thirdMessage);

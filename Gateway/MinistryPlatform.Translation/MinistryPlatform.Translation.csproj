@@ -244,6 +244,7 @@
     <Compile Include="Repositories\Interfaces\IChildcareRepository.cs" />
     <Compile Include="Repositories\GroupRepository.cs" />
     <Compile Include="Repositories\Interfaces\IInvitationRepository.cs" />
+    <Compile Include="Repositories\Interfaces\Rules\IRule.cs" />
     <Compile Include="Repositories\InvitationlRepository.cs" />
     <Compile Include="Repositories\GroupToolRepository.cs" />
     <Compile Include="Repositories\Interfaces\GoCincinnati\IGroupConnectorRepository.cs" />
@@ -319,6 +320,10 @@
     <Compile Include="Repositories\ProgramRepository.cs" />
     <Compile Include="Repositories\ResponseRepository.cs" />
     <Compile Include="Repositories\RoomRepository.cs" />
+    <Compile Include="Repositories\Rules\CongregationRule.cs" />
+    <Compile Include="Repositories\Rules\GenderRule.cs" />
+    <Compile Include="Repositories\Rules\Ruleset.cs" />
+    <Compile Include="Repositories\Rules\SchoolGradeRule.cs" />
     <Compile Include="Repositories\SelectionRepository.cs" />
     <Compile Include="Repositories\SkillsRepository.cs" />
     <Compile Include="Repositories\TaskRepository.cs" />

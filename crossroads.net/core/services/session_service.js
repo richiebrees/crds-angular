@@ -207,7 +207,7 @@
     * Clears out the setInterval created by enableReactiveSso
     */
     vm.disableReactiveSso = () => {
-      clearInterval($rootScope.reactiveSsoInterval);
+      $interval.cancel($rootScope.reactiveSsoInterval);
     };
 
     /**
@@ -220,7 +220,7 @@
     */
     vm.enableReactiveSso = (event, stateName, stateData, stateToParams) => {
       vm.disableReactiveSso();
-      vm.reactiveSsoInterval = setInterval(() => {
+      vm.reactiveSsoInterval = $interval(() => {
         vm.performReactiveSso(event, stateName, stateData, stateToParams);
       }, 3000);
     };

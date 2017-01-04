@@ -32,6 +32,9 @@ namespace crds_angular.test.Services
 
         private readonly int paidInFull = 54;
         private readonly int somePaid = 45;
+        private readonly int nonePaid = 12;
+        private readonly int defaultPaymentStatus = 15;
+        private readonly int declinedPaymentStatus = 20;
 
         public PaymentServiceTest()
         {
@@ -48,6 +51,9 @@ namespace crds_angular.test.Services
             _configWrapper = new Mock<IConfigurationWrapper>();
             _configWrapper.Setup(m => m.GetConfigIntValue("PaidInFull")).Returns(paidInFull);
             _configWrapper.Setup(m => m.GetConfigIntValue("SomePaid")).Returns(somePaid);
+            _configWrapper.Setup(m => m.GetConfigIntValue("NonePaid")).Returns(nonePaid);
+            _configWrapper.Setup(m => m.GetConfigIntValue("DonationStatusPending")).Returns(defaultPaymentStatus);
+            _configWrapper.Setup(m => m.GetConfigIntValue("DonationStatusDeclined")).Returns(declinedPaymentStatus);
             _fixture = new PaymentService(_invoiceRepository.Object, _paymentRepository.Object, _configWrapper.Object, _contactRepository.Object, _paymentTypeRepository.Object, _eventRepository.Object, _communicationRepository.Object );            
         }         
 
@@ -252,11 +258,13 @@ namespace crds_angular.test.Services
             {
                 new MpPayment()
                 {
-                    PaymentTotal = 20
+                    PaymentTotal = 20,
+                    PaymentStatus = 3
                 },
                  new MpPayment()
                 {
-                    PaymentTotal = 200
+                    PaymentTotal = 200,
+                    PaymentStatus = 3
                 }
             };
 
@@ -307,11 +315,13 @@ namespace crds_angular.test.Services
             {
                 new MpPayment()
                 {
-                    PaymentTotal = 300
+                    PaymentTotal = 300,
+                    PaymentStatus = 3
                 },
                  new MpPayment()
                 {
-                    PaymentTotal = 200
+                    PaymentTotal = 200,
+                    PaymentStatus = 3
                 }
             };
 
@@ -504,7 +514,33 @@ namespace crds_angular.test.Services
             _configWrapper.VerifyAll();
         }
 
-        private static List<MpPayment> fakePayments(int payerId, decimal paymentTotal, int paymentIdOfOne = 34525)
+        [Test]
+        public void ShouldSetStatusToSomePaid()
+        {
+            const int invoiceId = 1234;
+
+            _paymentRepository.Setup(m => m.GetPaymentsForInvoice(invoiceId)).Returns(fakePayments(12, 100, 34525, defaultPaymentStatus));
+            _invoiceRepository.Setup(m => m.SetInvoiceStatus(invoiceId, somePaid));
+
+            _fixture.UpdateInvoiceStatusAfterDecline(invoiceId);
+            _paymentRepository.VerifyAll();
+            _invoiceRepository.VerifyAll();
+        }
+
+        [Test]
+        public void ShouldSetStatusToNonePaid()
+        {
+            const int invoiceId = 1234;
+
+            _paymentRepository.Setup(m => m.GetPaymentsForInvoice(invoiceId)).Returns(fakePayments(12, 100, 34525, declinedPaymentStatus));
+            _invoiceRepository.Setup(m => m.SetInvoiceStatus(invoiceId, nonePaid));
+
+            _fixture.UpdateInvoiceStatusAfterDecline(invoiceId);
+            _paymentRepository.VerifyAll();
+            _invoiceRepository.VerifyAll();
+        }
+
+        private static List<MpPayment> fakePayments(int payerId, decimal paymentTotal, int paymentIdOfOne = 34525, int paymentStatus = 0)
         {
             return new List<MpPayment>
             {
@@ -512,12 +548,13 @@ namespace crds_angular.test.Services
                 {
                     PaymentId = paymentIdOfOne,
                     ContactId = payerId,                  
-                    PaymentTotal = paymentTotal
+                    PaymentTotal = paymentTotal,
+                    PaymentStatus = paymentStatus
                 }, 
                 new MpPayment()
                 {
                     PaymentTotal = 24.0M,
-
+                    PaymentStatus = paymentStatus
                 }
             };
         }

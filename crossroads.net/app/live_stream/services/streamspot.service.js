@@ -1,8 +1,9 @@
+
 import Event from '../models/event';
 
 export default class StreamspotService {
 
-  constructor($resource, $rootScope, StreamStatusService) {
+  constructor($resource, $rootScope, StreamStatusService, $state, $location) {
     this.resource = $resource;
     this.rootScope = $rootScope;
     this.streamStatusService = StreamStatusService;
@@ -13,37 +14,36 @@ export default class StreamspotService {
     this.url  = __STREAMSPOT_ENDPOINT__;
     this.ssid = __STREAMSPOT_SSID__;
     this.events = this.getEvents();
+    this.state = $state;
+    this.location = $location;
+    this.isBroadcasting = false;
   }
 
   broadcast() {
-    let events = this.parseEvents();
-    let event = _(events).first();
-
-    let streamStatus = this.streamStatusService.setStreamStatus(events, event.isBroadcasting());
-
-    // dispatch updates
+    const events = this.parseEvents();
+    const event = _(events).first();
+    this.streamStatusService.setStreamStatus(events, event.isBroadcasting());
     this.rootScope.$broadcast('isBroadcasting', event.isBroadcasting());
     this.rootScope.$broadcast('nextEvent', event);
   }
 
   getEvents() {
-    let url = `${this.url}broadcaster/${this.ssid}/events`;
-
+    const url = `${this.url}broadcaster/${this.ssid}/events`;
     return this.resource(url, {}, { get: { method: 'GET', headers: this.headers } })
       .get()
       .$promise
       .then((response) => {
         this.eventResponse = response.data.events;
-        let events = this.parseEvents();
+        const events = this.parseEvents();
         if (events.length > 0) {
           this.broadcast();
           setInterval(() => {
             this.broadcast();
             this.rootScope.$apply();
-          }, 1000)
+          }, 1000);
         }
         return events;
-      })
+      });
   }
 
   parseEvents() {
@@ -51,7 +51,7 @@ export default class StreamspotService {
       .chain(this.eventResponse)
       .sortBy('start')
       .map((object) => {
-        let event = Event.build(object);
+        const event = Event.build(object);
         if (event.isBroadcasting() || event.isUpcoming()) {
           return event;
         }
@@ -72,23 +72,36 @@ export default class StreamspotService {
   }
 
   getBroadcaster() {
-    let url = `${this.url}broadcaster/${this.ssid}?players=true`;
-    return this.get(url);
+    return this.get(`${this.url}broadcaster/${this.ssid}?players=true`);
   }
 
   getPlayers() {
-    let url = `${this.url}broadcaster/${this.ssid}/players`;
-    return this.get(url);
+    return this.get(`${this.url}broadcaster/${this.ssid}/players`);
   }
 
   getBroadcasting() {
-    let url = `${this.url}broadcaster/${this.ssid}/broadcasting`;
-    return this.get(url);
+    return this.get(`${this.url}broadcaster/${this.ssid}/broadcasting`);
   }
 
-  handleError(error) {
-    console.error('An error occurred');
-    return Promise.reject(error);
+  checkBroadcasting() {
+    let debug = false;
+    if (this.location !== undefined) {
+      const params = this.location.search();
+      debug = params.debug;
+    }
+    if (debug === 'true') {
+      this.isBroadcasting = true;
+    } else {
+      this.getBroadcasting().then((response) => {
+        this.isBroadcasting = false;
+        if (response !== undefined && response.data !== undefined) {
+          this.isBroadcasting = response.data.isBroadcasting;
+        }
+        if (this.isBroadcasting === false) {
+          this.state.go('live');
+        }
+      });
+    }
   }
 
 }

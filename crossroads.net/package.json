@@ -124,8 +124,7 @@
     "ui-select": "^0.17.1",
     "video.js": "5.14.1",
     "videojs-chromecast": "^2.0.8",
-    "wow.js": "^1.2.0",
-    "crds-styles": "crdschurch/crds-styles#development"
+    "wow.js": "^1.2.0"
   },
   "browser": {
     "angular-aside": "./lib/angular-aside.js",

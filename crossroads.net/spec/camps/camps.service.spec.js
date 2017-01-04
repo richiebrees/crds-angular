@@ -91,7 +91,7 @@ describe('Camp Service', () => {
       invoiceId: 123
     };
 
-    httpBackend.expectGET(`${endpoint}/camps/${campId}/product/${camperId}`).respond(200, productInfo);
+    httpBackend.expectGET(`${endpoint}/camps/${campId}/product/${camperId}?cache=false`).respond(200, productInfo);
     expect(campsService.getCampProductInfo(campId, camperId));
     httpBackend.flush();
     expect(campsService.productInfo.invoiceId).toEqual(123);
@@ -104,7 +104,7 @@ describe('Camp Service', () => {
       invoiceId: 123
     };
 
-    httpBackend.expectGET(`${endpoint}/camps/${campId}/product/${camperId}`).respond(200, productInfo);
+    httpBackend.expectGET(`${endpoint}/camps/${campId}/product/${camperId}?cache=false`).respond(200, productInfo);
     httpBackend.whenGET(`${endpoint}/v1.0.0/invoice/${productInfo.invoiceId}/has-payment`).respond(200, {});
     expect(campsService.getCampProductInfo(campId, camperId, true));
     httpBackend.flush();
@@ -120,7 +120,7 @@ describe('Camp Service', () => {
 
     campsService.sessionStorage.campDeposits = undefined;
 
-    httpBackend.expectGET(`${endpoint}/camps/${campId}/product/${camperId}`).respond(200, productInfo);
+    httpBackend.expectGET(`${endpoint}/camps/${campId}/product/${camperId}?cache=false`).respond(200, productInfo);
     httpBackend.expectGET(`${endpoint}/v1.0.0/invoice/${productInfo.invoiceId}/has-payment?cache=false&method=GET`).respond(302, { status: 302 });
     expect(campsService.getCampProductInfo(campId, camperId, true));
     httpBackend.flush();
@@ -140,7 +140,7 @@ describe('Camp Service', () => {
     campsService.sessionStorage.campDeposits[`${campId}+${camperId}`] = true;
     let checkedForDeposit = false;
 
-    httpBackend.expectGET(`${endpoint}/camps/${campId}/product/${camperId}`).respond(200, productInfo);
+    httpBackend.expectGET(`${endpoint}/camps/${campId}/product/${camperId}?cache=false`).respond(200, productInfo);
     httpBackend.whenGET(`${endpoint}/v1.0.0/invoice/${productInfo.invoiceId}/has-payment?cache=false&method=GET`).respond(() => {
       checkedForDeposit = true;
       return [400, ''];

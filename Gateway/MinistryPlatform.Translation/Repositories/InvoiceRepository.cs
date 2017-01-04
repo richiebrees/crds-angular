@@ -94,5 +94,12 @@ namespace MinistryPlatform.Translation.Repositories
             }
             return new Result<MpInvoiceDetail>(false, "no invoice details for that user and product");
         }
+
+        public int GetInvoiceIdForPayment(int paymentId)
+        {
+            var searchString = $"Payment_ID_Table.[Payment_ID]={paymentId}";
+            var column = "Invoice_Detail_ID_Table_Invoice_ID_Table.[Invoice_ID]";
+            return _ministryPlatformRest.Search<int>("Payment_Detail", searchString, column);
+        }
     }
 }

@@ -31,7 +31,9 @@ Param (
   [Parameter(Mandatory=$true)]
   [string] $EmailServer,
   [Parameter(Mandatory=$true)]
-  [string] $EmailUserName
+  [string] $EmailUserName,
+  [Parameter(Mandatory=$true)]
+  [string] $RegisterApiPasswordHash
 )
 
 $backupDateStamp = Get-Date -format 'yyyyMMdd';
@@ -147,6 +149,8 @@ UPDATE [dbo].[dp_Domains]
 
 SELECT * FROM dp_Domains;
 
+-- Update register_api users password hash
+UPDATE dp_Users SET Password = $RegisterApiPasswordHash WHERE User_Name = 'register_api'
 
 -- Update Mobile Tools settings
 USE [$DBName]
@@ -244,13 +248,13 @@ BEGIN
 	GRANT SUBSCRIBE QUERY NOTIFICATIONS TO [NT AUTHORITY\NETWORK SERVICE];
 
 	-- Grant service broker permissins to Network Service
-	GRANT CREATE PROCEDURE TO [$InternalServerName\MPUser]
-	GRANT CREATE SERVICE TO [$InternalServerName\MPUser]
-	GRANT CREATE QUEUE TO [$InternalServerName\MPUser]
-	GRANT CONTROL ON SCHEMA::[dbo] TO [$InternalServerName\MPUser]
-	GRANT IMPERSONATE ON USER::[dbo] TO [$InternalServerName\MPUser]
-	GRANT REFERENCES ON CONTRACT::[http://schemas.microsoft.com/SQL/Notifications/PostQueryNotification] TO [$InternalServerName\MPUser]
-	GRANT SUBSCRIBE QUERY NOTIFICATIONS TO [$InternalServerName\MPUser]
+	GRANT CREATE PROCEDURE TO [$InternalDBServerName\MPUser]
+	GRANT CREATE SERVICE TO [$InternalDBServerName\MPUser]
+	GRANT CREATE QUEUE TO [$InternalDBServerName\MPUser]
+	GRANT CONTROL ON SCHEMA::[dbo] TO [$InternalDBServerName\MPUser]
+	GRANT IMPERSONATE ON USER::[dbo] TO [$InternalDBServerName\MPUser]
+	GRANT REFERENCES ON CONTRACT::[http://schemas.microsoft.com/SQL/Notifications/PostQueryNotification] TO [$InternalDBServerName\MPUser]
+	GRANT SUBSCRIBE QUERY NOTIFICATIONS TO [$InternalDBServerName\MPUser]
 END;
 
 USE [$DBName];

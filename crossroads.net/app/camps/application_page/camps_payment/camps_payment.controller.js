@@ -15,7 +15,7 @@ export default class CampPaymentController {
   }
 
   $onInit() {
-    this.update = this.state.toParams.update;
+    this.update = this.state.toParams.update || this.sessionStorage.campDeposits[`${this.state.toParams.campId}+${this.state.toParams.contactId}`];
 
     if (this.update && this.state.toParams.redirectTo) {
       this.redirectTo = this.state.toParams.redirectTo;
@@ -55,7 +55,7 @@ export default class CampPaymentController {
   }
 
   calculateDeposit() {
-    if (this.update || this.sessionStorage.campDeposits[`${this.state.toParams.campId}+${this.state.toParams.contactId}`]) {
+    if (this.update) {
       this.paymentRemaining = this.campsService.productInfo.camperInvoice.paymentLeft;
       this.invoiceTotal = this.campsService.productInfo.camperInvoice.invoiceTotal;
       this.totalPrice = this.paymentRemaining;

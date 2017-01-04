@@ -1,3 +1,4 @@
+
 LiveStreamRouter.$inject = ['$httpProvider', '$stateProvider'];
 
 export default function LiveStreamRouter($httpProvider, $stateProvider) {
@@ -15,9 +16,7 @@ export default function LiveStreamRouter($httpProvider, $stateProvider) {
         }
       },
       resolve: {
-        preloadStreamStatus: function (StreamStatusService) {
-          return StreamStatusService.presetStreamStatus();
-        }
+        preloadStreamStatus: StreamStatusService => StreamStatusService.presetStreamStatus()
       }
     })
     .state('livestream', {
@@ -29,6 +28,9 @@ export default function LiveStreamRouter($httpProvider, $stateProvider) {
           title: 'Live',
           description: ''
         }
+      },
+      resolve: {
+        preloadStreamStatus: StreamspotService => StreamspotService.checkBroadcasting()
       }
     })
     .state('livestream-videojs', {

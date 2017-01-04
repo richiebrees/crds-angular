@@ -6,7 +6,7 @@ require('../vendor/videojs5-hlsjs-source-handler.min');
 require('videojs-chromecast/dist/videojs-chromecast');
 
 export default class VideojsPlayerController {
-  /* @ngInject */
+
   constructor(StreamspotService, $rootScope, $analytics) {
     this.streamspotService = StreamspotService;
     this.rootScope         = $rootScope;
@@ -77,7 +77,7 @@ export default class VideojsPlayerController {
             window.SSTracker.stop();
             window.SSTracker = null;
           }
-          if ( this.angulartics !== undefined ) {
+          if (this.angulartics !== undefined) {
             this.angulartics.eventTrack('Pause', {
               category: 'Streaming',
               label: 'Live Streaming Pause'

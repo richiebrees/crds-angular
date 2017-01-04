@@ -1,4 +1,6 @@
+
 export default class StreamingController {
+
   constructor(CMSService, StreamspotService, GeolocationService, $rootScope, $modal, $location, $timeout, $sce, $document) {
     this.cmsService = CMSService;
     this.streamspotService = StreamspotService;
@@ -14,31 +16,16 @@ export default class StreamingController {
     this.dontMiss = [];
     this.beTheChurch = [];
     this.inlineGiving = [];
-
     this.sce = $sce;
-    let debug = false;
 
-    if ($location !== undefined) {
-      const params = $location.search();
-      debug = params.debug;
-    }
-
-    if (debug === 'true') {
-      this.inProgress = true;
-    } else {
-      this.rootScope.$on('isBroadcasting', (e, inProgress) => {
-        this.inProgress = inProgress;
-        if (this.inProgress === false) {
-          window.location.href = '/live';
-        }
-      });
-    }
+    this.inProgress = StreamspotService.isBroadcasting;
 
     this.cmsService
-        .getDigitalProgram()
-        .then((data) => {
-          this.sortDigitalProgram(data);
-        });
+      .getDigitalProgram()
+      .then((data) => {
+        this.sortDigitalProgram(data);
+      }
+    );
 
     this.openGeolocationModal();
   }
@@ -57,7 +44,7 @@ export default class StreamingController {
         feature.target = '_blank';
 
         if (typeof feature.image !== 'undefined' && typeof feature.image.filename !== 'undefined') {
-          let filename = feature.image.filename.replace('https://s3.amazonaws.com/crds-cms-uploads/', '');
+          const filename = feature.image.filename.replace('https://s3.amazonaws.com/crds-cms-uploads/', '');
           feature.image = `https://crds-cms-uploads.imgix.net/${filename}?ixjsv=2.2.3&w=225`;
         } else {
           feature.image = 'https://crds-cms-uploads.imgix.net/content/images/register-bg.jpg';

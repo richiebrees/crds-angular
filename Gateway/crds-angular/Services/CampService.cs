@@ -694,7 +694,7 @@ namespace crds_angular.Services
                 PolicyHolder = camperMed.PolicyHolder == "N/A"? null : camperMed.PolicyHolder,
                 PhysicianName = camperMed.PhysicianName == "N/A" ? null : camperMed.PhysicianName,
                 PhysicianPhone = camperMed.PhysicianPhone == "N/A" ? null : camperMed.PhysicianPhone,
-                MedicationsAdministered = camperMed.MedicationsAdministered.Split(',').ToList()
+                MedicationsAdministered = camperMed.MedicationsAdministered?.Split(',').ToList() ?? new List<string>()
             };
             camperMedInfo.Allergies = new List<Allergy>();
             foreach (var medInfo in allergies )

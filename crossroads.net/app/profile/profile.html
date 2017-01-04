@@ -26,7 +26,7 @@
       <ui-view ng-if="tab.active"></ui-view>
     </tab>
     <li role="tab" class="dropdown hidden-md hidden-lg hidden-sm dropdown-toggle" dropdown is-open="status.isopen">
-      <a dropdown-toggle ng-disabled="disabled">More <span class="caret"></span></a>
+      <a id="moreTab" dropdown-toggle ng-disabled="disabled">More <span class="caret"></span></a>
       <ul class="dropdown-menu" role="menu">
         <li ng-repeat="tab in profile.tabs | filter:tab.title==='Personal'"><a href="" ng-click="profile.goToTab(tab)">{{tab.title}}</a>
         </li>

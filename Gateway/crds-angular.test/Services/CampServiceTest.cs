@@ -705,6 +705,42 @@ namespace crds_angular.test.Services
         }
 
         [Test]
+        public void shouldGetCampMedicalInfoWhenThereAreNoMedications()
+        {
+            const int eventId = 1289;
+            const int contactId = 123; // this is set in the getFakeHouseholdMembers() method
+            const int loggedInContactId = 6767;
+            const string token = "LetMeIN!";
+
+            var me = getFakeContact(loggedInContactId);
+            var family = getFakeHouseholdMembers(me);
+            var mpMedInfo = new MpMedicalInformation
+            {
+                ContactId = contactId,
+                InsuranceCompany = "Fake Insurance",
+                MedicalInformationId = 12999,
+                MedicationsAdministered = null,
+                PhysicianName = "Dr. Tobias Funke",
+                PhysicianPhone = "1-800-ido-care",
+                PolicyHolder = "Lindsey",
+            };
+
+            _contactService.Setup(m => m.GetMyProfile(token)).Returns(me);
+            _contactService.Setup(m => m.GetHouseholdFamilyMembers(me.Household_ID)).Returns(family);
+            _contactService.Setup(m => m.GetOtherHouseholdMembers(loggedInContactId)).Returns(new List<MpHouseholdMember>());
+            _medicalInformationRepository.Setup(m => m.GetMedicalInformation(contactId)).Returns(mpMedInfo);
+            _medicalInformationRepository.Setup(m => m.GetMedicalAllergyInfo(contactId)).Returns(new List<MpMedical>());
+            _medicalInformationRepository.Setup(m => m.GetMedications(contactId)).Returns(new List<MpMedication>());
+
+            var res = _fixture.GetCampMedicalInfo(eventId, contactId, token);
+            Assert.AreEqual(123, res.ContactId);
+            Assert.IsEmpty(res.MedicationsAdministered);
+
+            _contactService.VerifyAll();
+            _medicalInformationRepository.VerifyAll();
+        }
+
+        [Test]
         public void shouldGetCamperInfo()
         {
             const int eventId = 123;

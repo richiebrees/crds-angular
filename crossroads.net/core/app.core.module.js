@@ -32,6 +32,13 @@
     'ngclipboard',
     'ngStorage'
     ])
+    .config(($logProvider) => {
+      let debug = true;
+      if (__CRDS_DEBUG__ !== '1') {
+        debug = false;
+      }
+      $logProvider.debugEnabled(debug);
+    })
     .constant('AUTH_EVENTS', {
       loginSuccess: 'auth-login-success',
       loginFailed: 'auth-login-failed',

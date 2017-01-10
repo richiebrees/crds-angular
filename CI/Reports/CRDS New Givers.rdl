@@ -28,6 +28,10 @@
           <QueryParameter Name="donationstatusid">
             <Value>=join(Parameters!donationstatusid.Value,",")</Value>
           </QueryParameter>
+          <QueryParameter Name="accountingcompanyid">
+            <Value>=join(Parameters!accountingcompanyid.Value,",")</Value>
+            <rd:UserDefined>true</rd:UserDefined>
+          </QueryParameter>
         </QueryParameters>
         <CommandType>StoredProcedure</CommandType>
         <CommandText>report_CRDS_New_Givers</CommandText>
@@ -210,6 +214,23 @@
         </Field>
       </Fields>
     </DataSet>
+  <DataSet Name="Accounting_Company">
+        <Query>
+          <DataSourceName>DataSource1</DataSourceName>
+          <CommandText>SELECT Accounting_Company_ID, Company_Name
+                        FROM Accounting_Companies </CommandText>
+        </Query>
+        <Fields>
+          <Field Name="Company_Name">
+            <DataField>Company_Name</DataField>
+            <rd:UserDefined>true</rd:UserDefined>
+          </Field>
+          <Field Name="Accounting_Company_ID">
+            <DataField>Accounting_Company_ID</DataField>
+            <rd:UserDefined>true</rd:UserDefined>
+          </Field>
+        </Fields>
+      </DataSet>
   </DataSets>
   <ReportSections>
     <ReportSection>
@@ -2555,6 +2576,18 @@
       </DefaultValue>
       <Prompt>UserID</Prompt>
       <Hidden>true</Hidden>
+    </ReportParameter>
+    <ReportParameter Name="accountingcompanyid">
+           <DataType>String</DataType>
+           <Prompt> Accounting Company</Prompt>
+           <ValidValues>
+             <DataSetReference>
+               <DataSetName>Accounting_Company</DataSetName>
+               <ValueField>Accounting_Company_ID</ValueField>
+               <LabelField>Company_Name</LabelField>
+             </DataSetReference>
+           </ValidValues>
+           <MultiValue>true</MultiValue>
     </ReportParameter>
   </ReportParameters>
   <rd:ReportUnitType>Inch</rd:ReportUnitType>

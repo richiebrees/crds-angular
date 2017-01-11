@@ -1,0 +1,8 @@
+USE [MinistryPlatform]
+GO
+
+IF EXISTS(SELECT 1 FROM [dbo].[dp_Page_Views] WHERE View_Title LIKE 'Community Group Event Participants - %' AND View_Title != 'Community Group Event Participants - All')
+BEGIN
+   DELETE FROM [dbo].[dp_Page_Views]
+   WHERE View_Title LIKE 'Community Group Event Participants - %' AND View_Title != 'Community Group Event Participants - All';
+END

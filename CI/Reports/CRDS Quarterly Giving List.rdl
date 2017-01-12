@@ -849,7 +849,7 @@
     </ReportParameter>
     <ReportParameter Name="AccountingCompanyId">
       <DataType>Integer</DataType>
-      <Prompt>AccountingCompanyId</Prompt>
+      <Prompt>Accounting Company</Prompt>
       <ValidValues>
         <DataSetReference>
           <DataSetName>AccountingCompany</DataSetName>

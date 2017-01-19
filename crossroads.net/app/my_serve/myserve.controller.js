@@ -72,16 +72,21 @@
     // Implementation Details //
     ////////////////////////////
 
+    // Activate what? What is lastDate, and why does setting it with a formatted date activate it?
     function activate() {
       vm.lastDate = formatDate(new Date(), 28);
     }
 
+    // This looks like a date helper function. Does this kind of functionality belong in the
+    // myserve.controller?
+    // What is the magic number 28?
     function addOneMonth(date) {
       var d = angular.copy(date);
       d.setDate(date.getDate() + 28);
       return d;
     }
 
+    // Check child forms for what? What does this function do?
     function checkChildForms() {
       var form = $scope.serveForm;
       var keys = _.keys(form);
@@ -99,12 +104,17 @@
       }
     }
 
+    // This looks like another date helper function. Seems like a good candidate to go into 
+    // some kind of helper class / module.
     function convertToDate(date) {
       // date comes in as mm/dd/yyyy, convert to yyyy-mm-dd for moment to handle
       var d = new Date(date);
       return d;
     }
 
+    // Filter what by dates?
+    // This function needs to know that data has fromDate and toDate as attributes. Can
+    // we just pass in data.fromDate and data.toDate as parameters in the method call?
     function filterByDates(event, data) {
       loadOpportunitiesByDate(data.fromDate, data.toDate).then(function(opps) {
         vm.groups = opps;
@@ -117,6 +127,10 @@
       });
     }
 
+    // Looks like a date helper function. It is the 3rd one. This type of functionality really should
+    // be pull out into a date helper class / module.
+    // The comment seems superfluous. Renaming the parameters would provide all the context this method
+    // needs to be self-documenting.
     /**
      * Takes a javascript date and returns a
      * string formated MM/DD/YYYY
@@ -135,6 +149,9 @@
     }
 
 
+    // This seems like it has good potential to be self documenting. You could rename the parameters to
+    // describe that the dates should be in epoch format. The function is short enough that it is easy
+    // to see it returns a promise.
     /**
      * This function will fetch a new set of serve opportunities between two dates
      * The dates passed in should be in epoch formatted in milliseconds
@@ -150,6 +167,9 @@
       }).$promise;
     }
 
+    // Function name says that it loads the next month, but it looks like it uses the #addOneMonth function,
+    // which only adds 28 days. This does not guarantee loading the next month.
+    // Looks like vm.loadMore and vm.loadText lines could be extracted into a helper method.
     function loadNextMonth() {
       if (vm.groups[0].day !== undefined) {
         vm.loadMore = true;
@@ -180,6 +200,7 @@
       }
     }
 
+    // Is this a ng1.5 build in function? Check child forms for what? Why return an empty string?
     function onBeforeUnload() {
       checkChildForms();
       if ($scope.serveForm.$dirty) {
@@ -187,6 +208,9 @@
       }
     }
 
+    // This has a lot of nested each methods. Seems like a potential performance pinch point. Also
+    // myserve.controller has to know that groups' serveTimes' servingTeams' members have a firstName, a name,
+    // a nickName, a lastName, a contactId, and an emailAddress.
     function personUpdateHandler(event, data) {
       vm.groups = angular.copy(vm.original);
       _.each(vm.groups, function(group) {
@@ -208,6 +232,8 @@
       $rootScope.$broadcast('rerunFilters', vm.groups);
     }
 
+    // Unclear if #showNoOpportunitiesMsg() returns a boolean or not. Can we wrap
+    // !filterState.isActive() into a more descriptive helper function?
     function showButton() {
       if (showNoOpportunitiesMsg()) {
         return false;
@@ -220,6 +246,8 @@
       return vm.groups.length < 1 || totalServeTimesLength() === 0;
     }
 
+    // What does this mean? Start the state change? Set the state change start time?
+    // Check child forms for what? WHY DOES THIS METHOD HAVE PARAMS IT DOESN'T USE???
     function stateChangeStart(event, toState, toParams, fromState, fromParams) {
       if ($scope.serveForm !== undefined) {
         checkChildForms();
@@ -232,6 +260,8 @@
       }
     }
 
+    // Is this the total number of service opportunities? Is it the total amount
+    // of time spent serving? Formatting makes this difficult to read.
     function totalServeTimesLength() {
       var len = _.reduce(vm.groups, function(total, n) {
         return total + n.serveTimes.length;
@@ -241,6 +271,11 @@
       return len;
     }
 
+    // This hurts to look at and reason about. Why does myserve.controller need
+    // to know about groups' serveTimes' servingTeams' groupId, eventId, and the
+    // servingTeams' members' contactId and serveRsvp.
+    // Also, the efficiency issues with this seem like it would create a performance
+    // problem at scale.
     function updateAfterSave(event, data) {
       _.each(vm.groups, function(group) {
         _.each(group.serveTimes, function(serveTime) {

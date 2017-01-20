@@ -66,6 +66,11 @@ describe('MyServeController', function() {
       expect(controller.groups.length).toBe(2);
     });
 
+    it('#hideButton should set the buttonIsHid attribute to true', function(){
+      expect(controller.buttonIsHid).toBe(false);
+      controller.hideButton();
+      expect(controller.buttonIsHid).toBe(true);
+    });
   });
 
 })

@@ -33,9 +33,11 @@
 
     var vm = this;
 
+    vm.buttonIsHid = false;
     vm.convertToDate = convertToDate;
     vm.filterState = filterState;
     vm.groups = Groups;
+    vm.hideButton = hideButton;
     vm.lastDate = null;
     vm.loadMore = false;
     vm.loadNextMonth = loadNextMonth;
@@ -148,6 +150,9 @@
       return d.format('MM/DD/YYYY');
     }
 
+    function hideButton() {
+      vm.buttonIsHid = true;
+    };
 
     // This seems like it has good potential to be self documenting. You could rename the parameters to
     // describe that the dates should be in epoch format. The function is short enough that it is easy
@@ -182,6 +187,7 @@
 
         loadOpportunitiesByDate(lastDate.getTime(), newDate.getTime()).then(function(more) {
           if (more.length === 0) {
+            hideButton();
             $rootScope.$emit('notify', $rootScope.MESSAGES.serveSignupMoreError);
           } else {
             vm.lastDate = formatDate(newDate);

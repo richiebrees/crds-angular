@@ -30,7 +30,7 @@
 
       <div class="row text-center">
         <div class="col-sm-12">
-          <button class="btn btn-block-mobile btn-standard" ng-show="serve.showButton()"  ng-click="serve.loadNextMonth()" ng-disabled="serve.loadMore"> {{serve.loadText}} </button>
+          <button class="btn btn-block-mobile btn-standard" ng-show="!serve.buttonIsHid"  ng-click="serve.loadNextMonth()" ng-disabled="serve.loadMore"> {{serve.loadText}} </button>
         </div>
       </div>
 
